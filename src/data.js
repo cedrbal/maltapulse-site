@@ -1,4 +1,4 @@
-const API_URL = "http://77.42.91.193:5000";
+const API_URL = "https://dried-menus-synthetic-won.trycloudflare.com";
 
 export async function fetchPosts() {
   try {
