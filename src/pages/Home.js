@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ARTICLES, SHOWS } from '../data';
+import { fetchPosts, mapPost, SHOWS } from '../data';
 import Sidebar from '../components/Sidebar';
 
 export default function Home() {
-  const hero = ARTICLES[0];
-  const side3 = ARTICLES.slice(1, 4);
-  const grid4 = ARTICLES.slice(0, 4);
-  const more4 = ARTICLES.slice(4);
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchPosts().then(posts => {
+      setArticles(posts.map(mapPost));
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) return <div style={{textAlign:'center',padding:80,color:'#fff'}}>Loading Malta Pulse...</div>;
+
+  const hero = articles[0];
+  const side3 = articles.slice(1, 4);
+  const grid4 = articles.slice(0, 4);
+  const more4 = articles.slice(4);
+
+  if (!hero) return <div style={{textAlign:'center',padding:80,color:'#fff'}}>No approved articles yet. Approve some posts in the dashboard!</div>;
 
   return (
     <>
@@ -17,7 +31,7 @@ export default function Home() {
           <div className="hero-main">
             <img src={hero.img} alt={hero.title} />
             <div className="hero-main-content">
-              <div className="cat-badge" style={{background:'#CE1126',color:'#fff'}}>🔴 Breaking</div>
+              <div className="cat-badge" style={{background:'#CE1126',color:'#fff'}}>🔴 {hero.cat}</div>
               <div style={{fontFamily:"'Barlow Condensed',sans-serif",fontWeight:800,fontSize:32,color:'#fff',lineHeight:1.15,marginBottom:8}}>{hero.title}</div>
               <div style={{fontSize:12,color:'rgba(255,255,255,0.5)'}}>{hero.source} · {hero.time}</div>
             </div>
@@ -60,11 +74,11 @@ export default function Home() {
               ))}
             </div>
 
-            {/* MORE NEWS LIST */}
+            {/* MORE NEWS */}
             <div className="sec-head">
               <div className="sec-accent" style={{background:'#7B2FBE'}} />
-              <h2>World News</h2>
-              <Link to="/world-news" className="sec-link">See all →</Link>
+              <h2>More News</h2>
+              <Link to="/local-news" className="sec-link">See all →</Link>
             </div>
             <div style={{marginBottom:32}}>
               {more4.map(a => (
@@ -95,22 +109,6 @@ export default function Home() {
                     <div className="show-venue">📍 {s.venue}</div>
                     <span className="show-price">{s.price}</span>
                   </div>
-                </div>
-              ))}
-            </div>
-
-            {/* VIDEOS */}
-            <div className="sec-head">
-              <div className="sec-accent" style={{background:'#1877F2'}} />
-              <h2>Videos</h2>
-              <Link to="/videos" className="sec-link">See all →</Link>
-            </div>
-            <div className="three-col" style={{marginBottom:32}}>
-              {ARTICLES.slice(0,3).map(a => (
-                <div key={a.id} className="video-card">
-                  <img src={a.img} alt="" className="video-thumb" />
-                  <div className="play-btn">▶</div>
-                  <div className="video-title">{a.title}</div>
                 </div>
               ))}
             </div>
