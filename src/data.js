@@ -82,4 +82,11 @@ export const NAV_LINKS = [
   { path:"/about", label:"About Us", icon:"ℹ️" },
   { path:"/contact", label:"Contact", icon:"📬" },
   { path:"/advertise", label:"Advertise With Us", icon:"📣" },
+  export const TRAFFIC_ROUTES = [
+  { name:"Regional Road (Birkirkara–Attard)", status:"clear", delay:0 },
+  { name:"Mosta Bypass", status:"heavy", delay:25 },
+  { name:"Coast Road (Sliema–Bugibba)", status:"slow", delay:12 },
+  { name:"Msida–Valletta Arterial", status:"clear", delay:0 },
+  { name:"Airport Link Road (Luqa)", status:"clear", delay:2 },
+  { name:"Gozo Ferry Approach", status:"slow", delay:8 },
 ];
