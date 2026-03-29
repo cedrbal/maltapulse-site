@@ -1,4 +1,4 @@
-const API_URL = "https://dried-menus-synthetic-won.trycloudflare.com";
+const API_URL = "https://safer-sandwich-brian-springs.trycloudflare.com";
 
 export async function fetchPosts() {
   try {
