@@ -1,18 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ARTICLES } from '../data';
+import { fetchPosts, mapPost } from '../data';
 import Sidebar from '../components/Sidebar';
 
 const cardLink = { textDecoration:'none', color:'inherit' };
 
-const WORLD = [
-  { id:10, cat:"World News", icon:"🌍", color:"#7B2FBE", title:"Major earthquake strikes Turkey — 6.8 magnitude, rescue teams deployed", excerpt:"A powerful 6.8 magnitude earthquake has struck central Turkey causing widespread damage. International rescue teams are being deployed as casualty numbers rise.", time:"30 min ago", source:"Reuters · BBC · AP", img:"https://images.unsplash.com/photo-1590845947376-2638caa89309?w=600&q=80", breaking:true },
-  { id:11, cat:"World News", icon:"🌍", color:"#7B2FBE", title:"EU announces new €2 billion climate fund targeting Mediterranean nations", excerpt:"Malta and other Mediterranean member states stand to benefit significantly from the new EU green transition fund announced in Brussels.", time:"2 hrs ago", source:"Reuters", img:"https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?w=600&q=80" },
-  { id:12, cat:"World News", icon:"🌍", color:"#7B2FBE", title:"Global oil prices drop 8% on surprise OPEC production announcement", excerpt:"Oil markets tumbled after OPEC+ surprised traders with a larger-than-expected production increase, sending Brent crude below $75 per barrel.", time:"4 hrs ago", source:"AP · Bloomberg", img:"https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=80" },
-  { id:13, cat:"World News", icon:"🌍", color:"#7B2FBE", title:"Italy announces new visa-free travel agreement with 15 countries", excerpt:"The agreement, which includes several North African nations, is expected to boost tourism across the Mediterranean including Malta as a transit hub.", time:"6 hrs ago", source:"CNN · Al Jazeera", img:"https://images.unsplash.com/photo-1555899434-94d1368aa7af?w=600&q=80" },
-];
-
 export default function WorldNews() {
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchPosts().then(posts => {
+      const world = posts.filter(p => p.category === 'World News');
+      setArticles(world.map((p, i) => mapPost(p, i)));
+      setLoading(false);
+    });
+  }, []);
+
   return (
     <>
       <div className="page-hero">
@@ -26,19 +30,25 @@ export default function WorldNews() {
         <div className="two-col">
           <main>
             <div className="sec-head"><div className="sec-accent" style={{background:'#7B2FBE'}}/><h2>International Headlines</h2></div>
-            <div className="two-col-equal">
-              {WORLD.map(a => (
-                <Link key={a.id} to={`/article/${a.id}`} state={{article:a}} style={cardLink} className={`art-card ${a.breaking?'breaking':''}`}>
-                  <img src={a.img} alt="" className="art-card-img"/>
-                  <div className="art-card-body">
-                    <div className="art-card-cat" style={{color:'#7B2FBE'}}>{a.icon} {a.cat}</div>
-                    <div className="art-card-title">{a.title}</div>
-                    <div className="art-card-excerpt">{a.excerpt}</div>
-                    <div className="art-card-meta"><span>{a.time}</span></div>
-                  </div>
-                </Link>
-              ))}
-            </div>
+            {loading ? (
+              <div style={{textAlign:'center',padding:60,color:'#aaa'}}>Loading…</div>
+            ) : articles.length === 0 ? (
+              <div style={{textAlign:'center',padding:40,color:'#aaa'}}>No world news articles yet.</div>
+            ) : (
+              <div className="two-col-equal">
+                {articles.map(a => (
+                  <Link key={a.id} to={`/article/${a.id}`} state={{article:a}} style={cardLink} className={`art-card ${a.breaking?'breaking':''}`}>
+                    <img src={a.img} alt="" className="art-card-img"/>
+                    <div className="art-card-body">
+                      <div className="art-card-cat" style={{color:'#7B2FBE'}}>{a.icon} {a.cat}</div>
+                      <div className="art-card-title">{a.title}</div>
+                      <div className="art-card-excerpt">{a.excerpt}</div>
+                      <div className="art-card-meta"><span>{a.time}</span></div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
           </main>
           <Sidebar/>
         </div>
