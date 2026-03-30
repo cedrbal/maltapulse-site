@@ -1,6 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ARTICLES } from '../data';
 import Sidebar from '../components/Sidebar';
+
+const cardLink = { display:'block', textDecoration:'none', color:'inherit' };
 
 const WORLD = [
   { id:10, cat:"World News", icon:"🌍", color:"#7B2FBE", title:"Major earthquake strikes Turkey — 6.8 magnitude, rescue teams deployed", excerpt:"A powerful 6.8 magnitude earthquake has struck central Turkey causing widespread damage. International rescue teams are being deployed as casualty numbers rise.", time:"30 min ago", source:"Reuters · BBC · AP", img:"https://images.unsplash.com/photo-1590845947376-2638caa89309?w=600&q=80", breaking:true },
@@ -25,7 +28,7 @@ export default function WorldNews() {
             <div className="sec-head"><div className="sec-accent" style={{background:'#7B2FBE'}}/><h2>International Headlines</h2></div>
             <div className="two-col-equal">
               {WORLD.map(a => (
-                <div key={a.id} className={`art-card ${a.breaking?'breaking':''}`}>
+                <Link key={a.id} to={`/article/${a.id}`} state={{article:a}} style={cardLink} className={`art-card ${a.breaking?'breaking':''}`}>
                   <img src={a.img} alt="" className="art-card-img"/>
                   <div className="art-card-body">
                     <div className="art-card-cat" style={{color:'#7B2FBE'}}>{a.icon} {a.cat}</div>
@@ -33,7 +36,7 @@ export default function WorldNews() {
                     <div className="art-card-excerpt">{a.excerpt}</div>
                     <div className="art-card-meta"><span>{a.time}</span></div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </main>

@@ -1,6 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ARTICLES } from '../data';
 import Sidebar from '../components/Sidebar';
+
+const cardLink = { display:'block', textDecoration:'none', color:'inherit' };
 
 export default function Breaking() {
   const breaking = ARTICLES.filter(a => a.breaking);
@@ -19,7 +22,7 @@ export default function Breaking() {
           <main>
             <div className="sec-head"><div className="sec-accent" style={{background:'#CE1126'}}/><h2>Breaking Now</h2></div>
             {breaking.map(a => (
-              <div key={a.id} className="art-card breaking" style={{marginBottom:16,display:'flex',gap:0,flexDirection:'column'}}>
+              <Link key={a.id} to={`/article/${a.id}`} state={{article:a}} style={{...cardLink,marginBottom:16,display:'flex',flexDirection:'column'}} className="art-card breaking">
                 <img src={a.img} alt="" className="art-card-img"/>
                 <div className="art-card-body">
                   <div className="art-card-cat" style={{color:'#CE1126'}}>🔴 {a.cat}</div>
@@ -27,18 +30,18 @@ export default function Breaking() {
                   <div className="art-card-excerpt">{a.excerpt}</div>
                   <div className="art-card-meta"><span>{a.time}</span></div>
                 </div>
-              </div>
+              </Link>
             ))}
             <div className="sec-head" style={{marginTop:24}}><div className="sec-accent"/><h2>Latest Updates</h2></div>
             {rest.map(a => (
-              <div key={a.id} className="list-card">
+              <Link key={a.id} to={`/article/${a.id}`} state={{article:a}} style={cardLink} className="list-card">
                 <img src={a.img} alt=""/>
                 <div>
                   <div className="list-card-cat">{a.icon} {a.cat}</div>
                   <div className="list-card-title">{a.title}</div>
                   <div className="list-card-meta">{a.time}</div>
                 </div>
-              </div>
+              </Link>
             ))}
           </main>
           <Sidebar/>

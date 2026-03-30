@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { fetchPosts, mapPost, SHOWS } from '../data';
 import Sidebar from '../components/Sidebar';
+
+const cardLink = { display:'block', textDecoration:'none', color:'inherit' };
 
 export default function Home() {
   const [articles, setArticles] = useState([]);
@@ -28,24 +30,24 @@ export default function Home() {
       {/* HERO */}
       <section className="hero-section">
         <div className="hero-grid">
-          <div className="hero-main">
+          <Link to={`/article/${hero.id}`} state={{article:hero}} style={cardLink} className="hero-main">
             <img src={hero.img} alt={hero.title} />
             <div className="hero-main-content">
               <div className="cat-badge" style={{background:'#CE1126',color:'#fff'}}>🔴 {hero.cat}</div>
               <div style={{fontFamily:"'Inter',sans-serif",fontWeight:700,fontSize:28,color:'#fff',lineHeight:1.2,marginBottom:8}}>{hero.title}</div>
               <div style={{fontSize:12,color:'rgba(255,255,255,0.5)'}}>{hero.time}</div>
             </div>
-          </div>
+          </Link>
           <div className="hero-sidebar">
             {side3.map(a => (
-              <div key={a.id} className="hero-side-card">
+              <Link key={a.id} to={`/article/${a.id}`} state={{article:a}} style={cardLink} className="hero-side-card">
                 <img src={a.img} alt="" className="hero-side-img" />
                 <div>
                   <div className="hero-side-cat">{a.icon} {a.cat}</div>
                   <div className="hero-side-title">{a.title}</div>
                   <div className="hero-side-meta">{a.time}</div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -62,7 +64,7 @@ export default function Home() {
             </div>
             <div className="two-col-equal" style={{marginBottom:32}}>
               {grid4.map(a => (
-                <div key={a.id} className={`art-card ${a.breaking ? 'breaking' : ''}`}>
+                <Link key={a.id} to={`/article/${a.id}`} state={{article:a}} style={cardLink} className={`art-card ${a.breaking ? 'breaking' : ''}`}>
                   <img src={a.img} alt="" className="art-card-img" />
                   <div className="art-card-body">
                     <div className="art-card-cat">{a.icon} {a.cat}</div>
@@ -70,7 +72,7 @@ export default function Home() {
                     <div className="art-card-excerpt">{a.excerpt}</div>
                     <div className="art-card-meta"><span>{a.time}</span></div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
 
@@ -82,14 +84,14 @@ export default function Home() {
             </div>
             <div style={{marginBottom:32}}>
               {more4.map(a => (
-                <div key={a.id} className="list-card">
+                <Link key={a.id} to={`/article/${a.id}`} state={{article:a}} style={cardLink} className="list-card">
                   <img src={a.img} alt="" />
                   <div>
                     <div className="list-card-cat">{a.icon} {a.cat}</div>
                     <div className="list-card-title">{a.title}</div>
                     <div className="list-card-meta">{a.time}</div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
 

@@ -1,5 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
+
+const cardLink = { display:'block', textDecoration:'none', color:'inherit' };
 
 const SPORTS = [
   { id:1, cat:"Football", title:"Hibernians win BOV Premier League title with stunning 3-1 victory", excerpt:"Hibernians clinched the BOV Premier League title with a commanding win over Valletta FC at the National Stadium. Striker Miguel Dos Santos scored a hat-trick.", time:"1 hr ago", source:"Malta Sports", img:"https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=600&q=80" },
@@ -30,7 +33,7 @@ export default function Sports() {
             <div className="sec-head"><div className="sec-accent" style={{background:'#2d9e6b'}}/><h2>Latest Sports News</h2></div>
             <div className="two-col-equal" style={{marginBottom:28}}>
               {SPORTS.map(a => (
-                <div key={a.id} className="art-card">
+                <Link key={a.id} to={`/article/${a.id}`} state={{article:a}} style={cardLink} className="art-card">
                   <img src={a.img} alt="" className="art-card-img"/>
                   <div className="art-card-body">
                     <div className="art-card-cat" style={{color:'#2d9e6b'}}>⚽ {a.cat}</div>
@@ -38,7 +41,7 @@ export default function Sports() {
                     <div className="art-card-excerpt">{a.excerpt}</div>
                     <div className="art-card-meta"><span>{a.time}</span></div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
             <div className="sec-head"><div className="sec-accent" style={{background:'#2d9e6b'}}/><h2>Upcoming Fixtures</h2></div>

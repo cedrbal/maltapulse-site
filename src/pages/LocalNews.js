@@ -1,6 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ARTICLES } from '../data';
 import Sidebar from '../components/Sidebar';
+
+const cardLink = { display:'block', textDecoration:'none', color:'inherit' };
 
 export default function LocalNews() {
   const local = ARTICLES.filter(a => !['World News'].includes(a.cat));
@@ -19,7 +22,7 @@ export default function LocalNews() {
             <div className="sec-head"><div className="sec-accent"/><h2>Malta News</h2></div>
             <div className="two-col-equal" style={{marginBottom:24}}>
               {local.map(a => (
-                <div key={a.id} className={`art-card ${a.breaking?'breaking':''}`}>
+                <Link key={a.id} to={`/article/${a.id}`} state={{article:a}} style={cardLink} className={`art-card ${a.breaking?'breaking':''}`}>
                   <img src={a.img} alt="" className="art-card-img"/>
                   <div className="art-card-body">
                     <div className="art-card-cat">{a.icon} {a.cat}</div>
@@ -27,7 +30,7 @@ export default function LocalNews() {
                     <div className="art-card-excerpt">{a.excerpt}</div>
                     <div className="art-card-meta"><span>{a.time}</span></div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </main>
