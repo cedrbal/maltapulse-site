@@ -45,9 +45,9 @@ export default function Sports() {
             <div style={{background:'#fff',borderRadius:14,border:'1px solid #E5E0D8',overflow:'hidden',marginBottom:28}}>
               {FIXTURES.map((f,i) => (
                 <div key={i} style={{padding:'14px 18px',borderBottom:i<FIXTURES.length-1?'1px solid #E5E0D8':'none',display:'flex',alignItems:'center',justifyContent:'space-between',gap:12}}>
-                  <div style={{fontFamily:"'Barlow Condensed',sans-serif",fontWeight:700,fontSize:16,flex:1,textAlign:'right'}}>{f.home}</div>
+                  <div style={{fontFamily:"'Inter',sans-serif",fontWeight:600,fontSize:15,flex:1,textAlign:'right'}}>{f.home}</div>
                   <div style={{background:'#2d9e6b',color:'#fff',fontWeight:800,fontSize:11,padding:'4px 10px',borderRadius:6,whiteSpace:'nowrap'}}>VS</div>
-                  <div style={{fontFamily:"'Barlow Condensed',sans-serif",fontWeight:700,fontSize:16,flex:1}}>{f.away}</div>
+                  <div style={{fontFamily:"'Inter',sans-serif",fontWeight:600,fontSize:15,flex:1}}>{f.away}</div>
                   <div style={{textAlign:'right',minWidth:120}}>
                     <div style={{fontSize:12,fontWeight:600}}>{f.date} · {f.time}</div>
                     <div style={{fontSize:11,color:'#aaa'}}>{f.comp}</div>

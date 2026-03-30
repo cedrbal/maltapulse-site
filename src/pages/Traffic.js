@@ -47,7 +47,7 @@ export default function Traffic() {
             {INCIDENTS.map((inc,i) => (
               <div key={i} style={{background:'#fff',borderRadius:12,border:`2px solid ${inc.severity==='heavy'?'#fce4ec':inc.severity==='slow'?'#fff3e0':'#e8f5e9'}`,padding:16,marginBottom:12}}>
                 <div style={{display:'flex',justifyContent:'space-between',marginBottom:6}}>
-                  <span className={`traffic-badge ${inc.severity}`} style={{fontFamily:"'Barlow Condensed',sans-serif",fontWeight:700,fontSize:12,letterSpacing:1}}>{inc.type.toUpperCase()}</span>
+                  <span className={`traffic-badge ${inc.severity}`} style={{fontFamily:"'Inter',sans-serif",fontWeight:600,fontSize:12,letterSpacing:1}}>{inc.type.toUpperCase()}</span>
                   <span style={{fontSize:11,color:'#aaa'}}>{inc.time}</span>
                 </div>
                 <div style={{fontWeight:600,fontSize:14,marginBottom:4}}>{inc.loc}</div>

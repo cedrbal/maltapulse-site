@@ -78,7 +78,7 @@ export default function Layout({ children }) {
         <div className="mobile-menu-header">
           <Link to="/" className="logo" onClick={() => setMenuOpen(false)}>
             {LOGO_SVG}
-            <div className="logo-text" style={{fontFamily:"'Barlow Condensed',sans-serif",fontWeight:900,fontSize:22,color:'#fff'}}>
+            <div className="logo-text" style={{fontFamily:"'Inter',sans-serif",fontWeight:700,fontSize:22,color:'#fff'}}>
               MALTA<span style={{color:'#CE1126'}}>PULSE</span>
             </div>
           </Link>

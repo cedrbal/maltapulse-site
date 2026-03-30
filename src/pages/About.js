@@ -20,7 +20,7 @@ export default function About() {
         <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:18,marginBottom:24}}>
           {[['24/7','Always on — news never sleeps'],['5 min','Update frequency for breaking news'],['7','AI agents working around the clock']].map(([val,label])=>(
             <div key={val} style={{background:'#fff',borderRadius:14,border:'1px solid #E5E0D8',padding:22,textAlign:'center'}}>
-              <div style={{fontFamily:"'Barlow Condensed',sans-serif",fontWeight:900,fontSize:44,color:'#CE1126'}}>{val}</div>
+              <div style={{fontFamily:"'Inter',sans-serif",fontWeight:700,fontSize:40,color:'#CE1126'}}>{val}</div>
               <div style={{fontSize:13,color:'#666',lineHeight:1.4}}>{label}</div>
             </div>
           ))}

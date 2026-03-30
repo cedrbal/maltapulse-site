@@ -23,15 +23,64 @@ export async function fetchBreaking() {
 }
 
 const CAT_META = {
-  "Breaking": { icon: "🚨", color: "#CE1126", img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80" },
-  "News":     { icon: "📰", color: "#1877F2", img: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=80" },
-  "Weather":  { icon: "🌤️", color: "#1877F2", img: "https://images.unsplash.com/photo-1592210454359-9043f067919b?w=600&q=80" },
-  "Traffic":  { icon: "🚗", color: "#FF6B35", img: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=600&q=80" },
-  "Sports":   { icon: "⚽", color: "#2d9e6b", img: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=600&q=80" },
-  "Lifestyle":{ icon: "❤️", color: "#FF6B35", img: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" },
-  "World News":{ icon: "🌍", color: "#7B2FBE", img: "https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?w=600&q=80" },
-  "Culture":  { icon: "🎭", color: "#E8B922", img: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&q=80" },
-  "Health":   { icon: "🏥", color: "#2d9e6b", img: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=80" },
+  "Breaking": { icon: "🚨", color: "#CE1126", imgs: [
+    "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80",
+    "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=600&q=80",
+    "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=600&q=80",
+    "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&q=80",
+  ]},
+  "News": { icon: "📰", color: "#1877F2", imgs: [
+    "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=80",
+    "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600&q=80",
+    "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600&q=80",
+    "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80",
+    "https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=600&q=80",
+  ]},
+  "Weather": { icon: "🌤️", color: "#1877F2", imgs: [
+    "https://images.unsplash.com/photo-1592210454359-9043f067919b?w=600&q=80",
+    "https://images.unsplash.com/photo-1504608524841-42584120d693?w=600&q=80",
+    "https://images.unsplash.com/photo-1516912481808-3406841bd33c?w=600&q=80",
+    "https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=600&q=80",
+  ]},
+  "Traffic": { icon: "🚗", color: "#FF6B35", imgs: [
+    "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=600&q=80",
+    "https://images.unsplash.com/photo-1567784177951-6fa58317e16b?w=600&q=80",
+    "https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=600&q=80",
+    "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600&q=80",
+  ]},
+  "Sports": { icon: "⚽", color: "#2d9e6b", imgs: [
+    "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=600&q=80",
+    "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600&q=80",
+    "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=600&q=80",
+    "https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?w=600&q=80",
+    "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=600&q=80",
+  ]},
+  "Lifestyle": { icon: "❤️", color: "#FF6B35", imgs: [
+    "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80",
+    "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80",
+    "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80",
+    "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80",
+    "https://images.unsplash.com/photo-1493770348161-369560ae357d?w=600&q=80",
+    "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80",
+  ]},
+  "World News": { icon: "🌍", color: "#7B2FBE", imgs: [
+    "https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?w=600&q=80",
+    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80",
+    "https://images.unsplash.com/photo-1569701813229-33284b643e3c?w=600&q=80",
+    "https://images.unsplash.com/photo-1526778548025-fa2f459cd5ce?w=600&q=80",
+  ]},
+  "Culture": { icon: "🎭", color: "#E8B922", imgs: [
+    "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&q=80",
+    "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=600&q=80",
+    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
+    "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80",
+  ]},
+  "Health": { icon: "🏥", color: "#2d9e6b", imgs: [
+    "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=80",
+    "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=600&q=80",
+    "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80",
+    "https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=600&q=80",
+  ]},
 };
 
 export function mapPost(p) {
@@ -45,7 +94,7 @@ export function mapPost(p) {
     excerpt: p.generatedPost ? p.generatedPost.slice(0, 200).replace(/[\s.…]+$/, '') + '...' : '',
     time: timeAgo(p.timestamp),
     source: p.source,
-    img: cat.img,
+    img: cat.imgs[p.id % cat.imgs.length],
     breaking: p.isBreaking,
   };
 }

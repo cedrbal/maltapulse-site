@@ -25,7 +25,7 @@ export default function Weather() {
         <div style={{background:'linear-gradient(135deg,#1a6fb5,#0d4a8a)',borderRadius:18,padding:28,color:'#fff',marginBottom:24,display:'grid',gridTemplateColumns:'1fr 1fr',gap:24}}>
           <div>
             <div style={{fontSize:11,letterSpacing:2,opacity:0.6,textTransform:'uppercase',marginBottom:4}}>Current Conditions · Grand Harbour</div>
-            <div style={{fontFamily:"'Barlow Condensed',sans-serif",fontWeight:900,fontSize:80,lineHeight:1}}>28°C</div>
+            <div style={{fontFamily:"'Inter',sans-serif",fontWeight:700,fontSize:72,lineHeight:1}}>28°C</div>
             <div style={{fontSize:18,fontWeight:600,marginBottom:12}}>☀️ Sunny & Clear</div>
             <div style={{fontSize:13,opacity:0.7}}>Feels like 31°C · UV Index: Very High (8)</div>
           </div>
@@ -51,7 +51,7 @@ export default function Weather() {
               <div key={d.day} style={{textAlign:'center',padding:'12px 6px',borderRadius:10,background:d.day==='Today'?'#E8F4FD':'transparent'}}>
                 <div style={{fontSize:12,fontWeight:600,marginBottom:6,color:d.day==='Today'?'#1a6fb5':'#666'}}>{d.day}</div>
                 <div style={{fontSize:28,marginBottom:6}}>{d.icon}</div>
-                <div style={{fontFamily:"'Barlow Condensed',sans-serif",fontWeight:800,fontSize:18}}>{d.high}°</div>
+                <div style={{fontFamily:"'Inter',sans-serif",fontWeight:700,fontSize:17}}>{d.high}°</div>
                 <div style={{fontSize:12,color:'#aaa'}}>{d.low}°</div>
                 <div style={{fontSize:10,color:'#999',marginTop:4}}>{d.desc}</div>
               </div>
@@ -67,7 +67,7 @@ export default function Weather() {
                 <div style={{fontWeight:600,fontSize:15}}>{l.loc}</div>
                 <div style={{fontSize:13,color:'#666',marginTop:2}}>{l.desc}</div>
               </div>
-              <div style={{fontFamily:"'Barlow Condensed',sans-serif",fontWeight:900,fontSize:36,color:'#1a6fb5'}}>{l.temp}°</div>
+              <div style={{fontFamily:"'Inter',sans-serif",fontWeight:700,fontSize:32,color:'#1a6fb5'}}>{l.temp}°</div>
             </div>
           ))}
         </div>

@@ -18,7 +18,7 @@ export default function Advertise() {
       </div>
       <div className="page-wrap">
         <div style={{textAlign:'center',maxWidth:640,margin:'0 auto 40px'}}>
-          <h2 style={{fontFamily:"'Barlow Condensed',sans-serif",fontWeight:800,fontSize:28,marginBottom:10}}>Why Advertise on Malta Pulse?</h2>
+          <h2 style={{fontFamily:"'Inter',sans-serif",fontWeight:700,fontSize:26,marginBottom:10}}>Why Advertise on Malta Pulse?</h2>
           <p style={{color:'#666',fontSize:14,lineHeight:1.7}}>Malta Pulse is Malta's fastest-growing 24/7 news platform. Our AI agents post breaking news around the clock, keeping readers engaged throughout the day — meaning your ad gets maximum exposure.</p>
         </div>
         <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:20,marginBottom:40}}>

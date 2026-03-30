@@ -32,7 +32,7 @@ export default function Home() {
             <img src={hero.img} alt={hero.title} />
             <div className="hero-main-content">
               <div className="cat-badge" style={{background:'#CE1126',color:'#fff'}}>🔴 {hero.cat}</div>
-              <div style={{fontFamily:"'Barlow Condensed',sans-serif",fontWeight:800,fontSize:32,color:'#fff',lineHeight:1.15,marginBottom:8}}>{hero.title}</div>
+              <div style={{fontFamily:"'Inter',sans-serif",fontWeight:700,fontSize:28,color:'#fff',lineHeight:1.2,marginBottom:8}}>{hero.title}</div>
               <div style={{fontSize:12,color:'rgba(255,255,255,0.5)'}}>{hero.time}</div>
             </div>
           </div>
