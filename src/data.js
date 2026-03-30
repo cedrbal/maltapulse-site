@@ -1,4 +1,4 @@
-export const API_URL = "https://everybody-quotations-laboratory-laundry.trycloudflare.com";
+export const API_URL = "https://api.maltapulse.net";
 
 export async function fetchPosts() {
   try {
@@ -45,17 +45,31 @@ const CAT_META = {
   "Health":     { icon: "🏥", color: "#2d9e6b", imgs: ["https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=80","https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=600&q=80","https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80"] },
 };
 
+function stripMarkdown(text) {
+  if (!text) return '';
+  return text
+    .replace(/#{1,6}\s*/g, '')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/_{2}([^_]+)_{2}/g, '$1')
+    .replace(/#\w+/g, '')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
 export function mapPost(p, index = 0) {
   const cat = CAT_META[p.category] || CAT_META["News"];
   const fallbackImg = cat.imgs[index % cat.imgs.length];
+  const cleanText = stripMarkdown(p.generatedPost || '');
   return {
     id: p.id,
     cat: p.category || "News",
     icon: cat.icon,
     color: cat.color,
     title: p.rawTitle,
-    excerpt: p.generatedPost ? p.generatedPost.slice(0, 200).replace(/[\s.…]+$/, '') + '...' : '',
-    fullText: p.generatedPost || '',
+    excerpt: cleanText ? cleanText.slice(0, 200).replace(/[\s.…]+$/, '') + '...' : '',
+    fullText: cleanText,
     time: timeAgo(p.timestamp),
     source: p.source,
     img: p.imageUrl || fallbackImg,

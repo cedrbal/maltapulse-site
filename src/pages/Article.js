@@ -2,6 +2,29 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useLocation, Link } from 'react-router-dom';
 import { fetchPostById, mapPost } from '../data';
 
+// Strip markdown artifacts and render as clean paragraphs
+function cleanArticle(text) {
+  const cleaned = text
+    .replace(/#{1,6}\s*/g, '')          // remove # headings
+    .replace(/\*\*([^*]+)\*\*/g, '$1') // remove **bold**
+    .replace(/\*([^*]+)\*/g, '$1')     // remove *italic*
+    .replace(/_{2}([^_]+)_{2}/g, '$1') // remove __bold__
+    .replace(/#\w+/g, '')              // remove #hashtags
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // remove [links](url)
+    .trim();
+
+  const paragraphs = cleaned
+    .split(/\n\n+/)
+    .map(p => p.replace(/\n/g, ' ').trim())
+    .filter(p => p.length > 0);
+
+  return paragraphs.map((p, i) => (
+    <p key={i} style={{marginBottom: i < paragraphs.length - 1 ? '1.4em' : 0}}>
+      {p}
+    </p>
+  ));
+}
+
 export default function Article() {
   const { id } = useParams();
   const { state } = useLocation();
@@ -50,8 +73,8 @@ export default function Article() {
         <Link to="/" style={{display:'inline-flex',alignItems:'center',gap:6,color:'#666',fontSize:13,marginBottom:28}}>
           ← Back to home
         </Link>
-        <div style={{background:'#fff',borderRadius:16,border:'1px solid #E5E0D8',padding:'32px 36px',lineHeight:1.8,fontSize:16,color:'#1a1a1a',whiteSpace:'pre-wrap'}}>
-          {article.fullText || article.excerpt || 'No content available.'}
+        <div style={{background:'#fff',borderRadius:16,border:'1px solid #E5E0D8',padding:'32px 36px',lineHeight:1.8,fontSize:16,color:'#1a1a1a'}}>
+          {cleanArticle(article.fullText || article.excerpt || 'No content available.')}
         </div>
       </div>
     </>
