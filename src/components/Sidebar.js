@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ARTICLES, TRAFFIC_ROUTES } from '../data';
+import { ARTICLES } from '../data';
 import { API_URL } from '../data';
 
 function WeatherWidget() {
@@ -53,6 +53,51 @@ function WeatherWidget() {
   );
 }
 
+function TrafficWidget() {
+  const [routes, setRoutes] = useState([]);
+  const [updatedAgo, setUpdatedAgo] = useState(null);
+
+  useEffect(() => {
+    const load = () =>
+      fetch(`${API_URL}/api/traffic`)
+        .then(r => r.ok ? r.json() : null)
+        .then(d => {
+          if (d && d.routes) {
+            setRoutes(d.routes);
+            if (d.updated) {
+              const mins = Math.round((Date.now() - new Date(d.updated)) / 60000);
+              setUpdatedAgo(mins < 2 ? 'just now' : `${mins} min ago`);
+            }
+          }
+        })
+        .catch(() => {});
+    load();
+    const iv = setInterval(load, 5 * 60 * 1000);
+    return () => clearInterval(iv);
+  }, []);
+
+  return (
+    <div className="traffic-widget">
+      <div className="sec-head" style={{marginBottom:10,paddingBottom:8}}>
+        <div className="sec-accent" style={{background:'#2d9e6b'}} />
+        <h2 style={{fontSize:15}}>🚗 Live Traffic</h2>
+      </div>
+      {routes.slice(0,4).map(r => (
+        <div key={r.name} className="traffic-route">
+          <span className="traffic-route-name">{r.name.split('(')[0].trim()}</span>
+          <span className={`traffic-badge ${r.status}`}>
+            {r.status === 'clear' ? '✓ Clear' : r.status === 'slow' ? `~${r.delay}min` : `⚠ Heavy`}
+          </span>
+        </div>
+      ))}
+      {routes.length === 0 && <div style={{fontSize:12,color:'#aaa',padding:'8px 0'}}>Loading…</div>}
+      <div style={{fontSize:10,color:'#aaa',marginTop:8}}>
+        {updatedAgo ? `Updated ${updatedAgo}` : 'Live data'} · Google Maps
+      </div>
+    </div>
+  );
+}
+
 export default function Sidebar() {
   return (
     <aside>
@@ -61,21 +106,7 @@ export default function Sidebar() {
         <WeatherWidget />
 
         {/* TRAFFIC */}
-        <div className="traffic-widget">
-          <div className="sec-head" style={{marginBottom:10,paddingBottom:8}}>
-            <div className="sec-accent" style={{background:'#2d9e6b'}} />
-            <h2 style={{fontSize:15}}>🚗 Live Traffic</h2>
-          </div>
-          {TRAFFIC_ROUTES.slice(0,4).map(r => (
-            <div key={r.name} className="traffic-route">
-              <span className="traffic-route-name">{r.name.split('(')[0].trim()}</span>
-              <span className={`traffic-badge ${r.status}`}>
-                {r.status === 'clear' ? '✓ Clear' : r.status === 'slow' ? `~${r.delay}min` : `⚠ Heavy`}
-              </span>
-            </div>
-          ))}
-          <div style={{fontSize:10,color:'#aaa',marginTop:8}}>Updated 3 min ago · Google Maps</div>
-        </div>
+        <TrafficWidget />
 
         {/* FACEBOOK */}
         <div className="fb-widget">
