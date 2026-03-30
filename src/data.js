@@ -1,4 +1,4 @@
-export const API_URL = "https://ghz-given-idaho-arcade.trycloudflare.com";
+export const API_URL = "https://everybody-quotations-laboratory-laundry.trycloudflare.com";
 
 export async function fetchPosts() {
   try {
