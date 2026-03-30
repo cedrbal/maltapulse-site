@@ -56,7 +56,7 @@ export default function Layout({ children }) {
           </Link>
 
           <nav className="desktop-nav">
-            {NAV_LINKS.slice(0, 9).map(link => (
+            {NAV_LINKS.slice(0, 10).map(link => (
               <Link key={link.path} to={link.path} className={location.pathname === link.path ? 'active' : ''}>
                 {link.label}
               </Link>
