@@ -17,6 +17,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Advertise from './pages/Advertise';
 import Article from './pages/Article';
+import Blog from './pages/Blog';
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/advertise" element={<Advertise />} />
           <Route path="/article/:id" element={<Article />} />
+          <Route path="/blog" element={<Blog />} />
         </Routes>
       </Layout>
     </BrowserRouter>

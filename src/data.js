@@ -120,6 +120,7 @@ export const NAV_LINKS = [
   { path:"/sports", label:"Sports", icon:"⚽" },
   { path:"/lifestyle", label:"Lifestyle & Food", icon:"❤️" },
   { path:"/shows", label:"Shows & Events", icon:"🎭" },
+  { path:"/blog", label:"Blog", icon:"📝" },
   { path:"/happening", label:"What's Happening", icon:"✨" },
   { path:"/videos", label:"Videos", icon:"🎥" },
   { path:"/about", label:"About Us", icon:"ℹ️" },
