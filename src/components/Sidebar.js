@@ -1,22 +1,64 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ARTICLES, TRAFFIC_ROUTES } from '../data';
+import { API_URL } from '../data';
+
+function WeatherWidget() {
+  const [weather, setWeather] = useState(null);
+
+  useEffect(() => {
+    fetch(`${API_URL}/api/weather`)
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { if (d && d.locations && d.locations.length) setWeather(d); })
+      .catch(() => {});
+  }, []);
+
+  const valletta = weather?.locations?.find(l => l.location === 'Valletta') || null;
+
+  if (!valletta) return (
+    <div className="weather-widget">
+      <div className="weather-title">🌤️ Malta Weather</div>
+      <div className="weather-temp">—°C</div>
+      <div className="weather-desc">Loading...</div>
+    </div>
+  );
+
+  const windIcon = valletta.wind_speed > 50 ? '💨' : '🌬️';
+  const updatedMins = weather?.updated
+    ? Math.round((Date.now() - new Date(weather.updated)) / 60000)
+    : null;
+
+  return (
+    <div className="weather-widget">
+      <div className="weather-title">🌤️ Malta Weather</div>
+      <div className="weather-temp">{Math.round(valletta.temp)}°C</div>
+      <div className="weather-desc">{valletta.conditions} · Valletta</div>
+      <div className="weather-grid">
+        <div className="weather-stat">
+          <span className="weather-stat-val">{windIcon} {Math.round(valletta.wind_speed)}</span>
+          <span className="weather-stat-label">km/h wind</span>
+        </div>
+        <div className="weather-stat">
+          <span className="weather-stat-val">{Math.round(valletta.humidity)}%</span>
+          <span className="weather-stat-label">Humidity</span>
+        </div>
+        <div className="weather-stat">
+          <span className="weather-stat-val">{valletta.rain_prob ? Math.round(valletta.rain_prob) : 0}%</span>
+          <span className="weather-stat-label">Rain chance</span>
+        </div>
+      </div>
+      <div className="weather-updated">
+        {updatedMins !== null ? `Updated ${updatedMins < 2 ? 'just now' : `${updatedMins} min ago`}` : 'Live data'}
+      </div>
+    </div>
+  );
+}
 
 export default function Sidebar() {
   return (
     <aside>
       <div className="sidebar-sticky">
         {/* WEATHER */}
-        <div className="weather-widget">
-          <div className="weather-title">🌤️ Malta Weather</div>
-          <div className="weather-temp">28°C</div>
-          <div className="weather-desc">Sunny & clear · Grand Harbour</div>
-          <div className="weather-grid">
-            <div className="weather-stat"><span className="weather-stat-val">32°</span><span className="weather-stat-label">High</span></div>
-            <div className="weather-stat"><span className="weather-stat-val">65%</span><span className="weather-stat-label">Humidity</span></div>
-            <div className="weather-stat"><span className="weather-stat-val">UV 8</span><span className="weather-stat-label">Index</span></div>
-          </div>
-          <div className="weather-updated">Updated 5 min ago</div>
-        </div>
+        <WeatherWidget />
 
         {/* TRAFFIC */}
         <div className="traffic-widget">
