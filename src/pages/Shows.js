@@ -193,8 +193,9 @@ function EventCalendar({ allEvents }) {
 }
 
 export default function Shows() {
-  const [shows, setShows] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [shows,    setShows]    = useState([]);
+  const [loading,  setLoading]  = useState(true);
+  const [paidData, setPaidData] = useState([]);
 
   useEffect(() => {
     const load = () =>
@@ -203,8 +204,15 @@ export default function Shows() {
         .then(d => { setShows(Array.isArray(d) ? d : []); setLoading(false); })
         .catch(() => setLoading(false));
     load();
-    const iv = setInterval(load, 60 * 60 * 1000); // refresh every hour
+    const iv = setInterval(load, 60 * 60 * 1000);
     return () => clearInterval(iv);
+  }, []);
+
+  useEffect(() => {
+    fetch(`${API_URL}/api/paid-events`)
+      .then(r => r.ok ? r.json() : [])
+      .then(d => setPaidData(Array.isArray(d) ? d : []))
+      .catch(() => {});
   }, []);
 
   // Build all events for calendar
@@ -230,8 +238,29 @@ export default function Shows() {
 
   const allEvents = [...HOLIDAYS, ...FESTAS, ...scraped].sort((a,b) => a.date.localeCompare(b.date));
 
-  // Paid events section: scraped shows with real prices, plus any holiday/festa could be free
-  const paidEvents = shows.filter(s => s.price && s.price !== 'See details' && s.price !== 'Free' && s.price.trim() !== '');
+  // Paid events from ShowsHappening.com scraper
+  const paidEvents = paidData;
+
+  // Also add paid events to the calendar
+  paidData.forEach(s => {
+    if (!s.date) return;
+    const already = allEvents.find(e => e.date === s.date && e.name === s.name);
+    if (!already) {
+      allEvents.push({
+        date:    s.date,
+        name:    s.name,
+        emoji:   '🎟️',
+        type:    'paid',
+        desc:    s.desc || '',
+        time:    s.time || '',
+        venue:   s.venue || '',
+        url:     s.url,
+        price:   s.price,
+        img:     s.img,
+        soldOut: s.soldOut || false,
+      });
+    }
+  });
 
   return (
     <>
@@ -269,7 +298,7 @@ export default function Shows() {
         ) : (
           <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:18,marginBottom:32}} className="shows-grid-inner">
             {paidEvents.map(s => (
-              <div key={s.id} style={{background:'#fff',borderRadius:14,border:'1px solid #E5E0D8',overflow:'hidden',boxShadow:'0 2px 10px rgba(0,0,0,0.06)',display:'flex',flexDirection:'column'}}>
+              <div key={s.uid || s.id} style={{background:'#fff',borderRadius:14,border:'1px solid #E5E0D8',overflow:'hidden',boxShadow:'0 2px 10px rgba(0,0,0,0.06)',display:'flex',flexDirection:'column'}}>
                 <div style={{position:'relative'}}>
                   <img src={s.img} alt={s.name} style={{width:'100%',height:170,objectFit:'cover'}} />
                   {s.soldOut && (
