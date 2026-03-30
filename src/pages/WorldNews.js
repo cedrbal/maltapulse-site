@@ -38,7 +38,7 @@ export default function WorldNews() {
               <div className="two-col-equal">
                 {articles.map(a => (
                   <Link key={a.id} to={`/article/${a.id}`} state={{article:a}} style={cardLink} className={`art-card ${a.breaking?'breaking':''}`}>
-                    <img src={a.img} alt="" className="art-card-img"/>
+                    <img src={a.img} alt="" className="art-card-img" onError={e => { e.target.onerror = null; e.target.src = a.fallbackImg; }}/>
                     <div className="art-card-body">
                       <div className="art-card-cat" style={{color:'#7B2FBE'}}>{a.icon} {a.cat}</div>
                       <div className="art-card-title">{a.title}</div>

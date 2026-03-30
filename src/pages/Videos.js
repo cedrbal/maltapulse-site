@@ -16,7 +16,7 @@ export default function Videos() {
         <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16}}>
           {[...ARTICLES,...ARTICLES].slice(0,9).map((a,i) => (
             <div key={i} className="video-card" style={{borderRadius:12}}>
-              <img src={a.img} alt="" className="video-thumb" style={{height:165}}/>
+              <img src={a.img} alt="" className="video-thumb" style={{height:165}} onError={e => { e.target.onerror = null; e.target.src = a.fallbackImg; }}/>
               <div className="play-btn" style={{width:44,height:44,fontSize:16}}>▶</div>
               <div className="video-title" style={{fontSize:14,padding:'10px 12px 12px'}}>{a.title}</div>
               <div style={{padding:'0 12px 12px',fontSize:11,color:'rgba(255,255,255,0.4)'}}>{a.time}</div>

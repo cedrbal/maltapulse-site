@@ -31,7 +31,7 @@ export default function Home() {
       <section className="hero-section">
         <div className="hero-grid">
           <Link to={`/article/${hero.id}`} state={{article:hero}} style={cardLink} className="hero-main">
-            <img src={hero.img} alt={hero.title} />
+            <img src={hero.img} alt={hero.title} onError={e => { e.target.onerror = null; e.target.src = hero.fallbackImg; }} />
             <div className="hero-main-content">
               <div className="cat-badge" style={{background:'#CE1126',color:'#fff'}}>🔴 {hero.cat}</div>
               <div style={{fontFamily:"'Inter',sans-serif",fontWeight:700,fontSize:28,color:'#fff',lineHeight:1.2,marginBottom:8}}>{hero.title}</div>
@@ -41,7 +41,7 @@ export default function Home() {
           <div className="hero-sidebar">
             {side3.map(a => (
               <Link key={a.id} to={`/article/${a.id}`} state={{article:a}} style={cardLink} className="hero-side-card">
-                <img src={a.img} alt="" className="hero-side-img" />
+                <img src={a.img} alt="" className="hero-side-img" onError={e => { e.target.onerror = null; e.target.src = a.fallbackImg; }} />
                 <div>
                   <div className="hero-side-cat">{a.icon} {a.cat}</div>
                   <div className="hero-side-title">{a.title}</div>
@@ -65,7 +65,7 @@ export default function Home() {
             <div className="two-col-equal" style={{marginBottom:32}}>
               {grid4.map(a => (
                 <Link key={a.id} to={`/article/${a.id}`} state={{article:a}} style={cardLink} className={`art-card ${a.breaking ? 'breaking' : ''}`}>
-                  <img src={a.img} alt="" className="art-card-img" />
+                  <img src={a.img} alt="" className="art-card-img" onError={e => { e.target.onerror = null; e.target.src = a.fallbackImg; }} />
                   <div className="art-card-body">
                     <div className="art-card-cat">{a.icon} {a.cat}</div>
                     <div className="art-card-title">{a.title}</div>
@@ -85,7 +85,7 @@ export default function Home() {
             <div style={{marginBottom:32}}>
               {more4.map(a => (
                 <Link key={a.id} to={`/article/${a.id}`} state={{article:a}} style={cardLink} className="list-card">
-                  <img src={a.img} alt="" />
+                  <img src={a.img} alt="" onError={e => { e.target.onerror = null; e.target.src = a.fallbackImg; }} />
                   <div>
                     <div className="list-card-cat">{a.icon} {a.cat}</div>
                     <div className="list-card-title">{a.title}</div>

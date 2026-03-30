@@ -47,6 +47,7 @@ const CAT_META = {
 
 export function mapPost(p, index = 0) {
   const cat = CAT_META[p.category] || CAT_META["News"];
+  const fallbackImg = cat.imgs[index % cat.imgs.length];
   return {
     id: p.id,
     cat: p.category || "News",
@@ -57,7 +58,8 @@ export function mapPost(p, index = 0) {
     fullText: p.generatedPost || '',
     time: timeAgo(p.timestamp),
     source: p.source,
-    img: p.imageUrl || cat.imgs[index % cat.imgs.length],
+    img: p.imageUrl || fallbackImg,
+    fallbackImg,
     breaking: p.isBreaking,
   };
 }

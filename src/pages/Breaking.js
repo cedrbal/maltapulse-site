@@ -40,7 +40,7 @@ export default function Breaking() {
                     <div className="sec-head"><div className="sec-accent" style={{background:'#CE1126'}}/><h2>Breaking Now</h2></div>
                     {breaking.map(a => (
                       <Link key={a.id} to={`/article/${a.id}`} state={{article:a}} style={{...cardLink,marginBottom:16,display:'flex',flexDirection:'column'}} className="art-card breaking">
-                        <img src={a.img} alt="" className="art-card-img"/>
+                        <img src={a.img} alt="" className="art-card-img" onError={e => { e.target.onerror = null; e.target.src = a.fallbackImg; }}/>
                         <div className="art-card-body">
                           <div className="art-card-cat" style={{color:'#CE1126'}}>🔴 {a.cat}</div>
                           <div className="art-card-title" style={{fontSize:24}}>{a.title}</div>
@@ -57,7 +57,7 @@ export default function Breaking() {
                 ) : (
                   rest.map(a => (
                     <Link key={a.id} to={`/article/${a.id}`} state={{article:a}} style={cardLink} className="list-card">
-                      <img src={a.img} alt=""/>
+                      <img src={a.img} alt="" onError={e => { e.target.onerror = null; e.target.src = a.fallbackImg; }}/>
                       <div>
                         <div className="list-card-cat">{a.icon} {a.cat}</div>
                         <div className="list-card-title">{a.title}</div>
