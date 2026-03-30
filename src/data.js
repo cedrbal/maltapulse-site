@@ -57,7 +57,7 @@ export function mapPost(p, index = 0) {
     fullText: p.generatedPost || '',
     time: timeAgo(p.timestamp),
     source: p.source,
-    img: cat.imgs[index % cat.imgs.length],
+    img: p.imageUrl || cat.imgs[index % cat.imgs.length],
     breaking: p.isBreaking,
   };
 }
