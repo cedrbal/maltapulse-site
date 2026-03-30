@@ -33,7 +33,7 @@ export default function Home() {
             <div className="hero-main-content">
               <div className="cat-badge" style={{background:'#CE1126',color:'#fff'}}>🔴 {hero.cat}</div>
               <div style={{fontFamily:"'Barlow Condensed',sans-serif",fontWeight:800,fontSize:32,color:'#fff',lineHeight:1.15,marginBottom:8}}>{hero.title}</div>
-              <div style={{fontSize:12,color:'rgba(255,255,255,0.5)'}}>{hero.source} · {hero.time}</div>
+              <div style={{fontSize:12,color:'rgba(255,255,255,0.5)'}}>{hero.time}</div>
             </div>
           </div>
           <div className="hero-sidebar">
@@ -68,7 +68,7 @@ export default function Home() {
                     <div className="art-card-cat">{a.icon} {a.cat}</div>
                     <div className="art-card-title">{a.title}</div>
                     <div className="art-card-excerpt">{a.excerpt}</div>
-                    <div className="art-card-meta"><span>{a.source}</span><span style={{color:'#ddd'}}>·</span><span>{a.time}</span></div>
+                    <div className="art-card-meta"><span>{a.time}</span></div>
                   </div>
                 </div>
               ))}
@@ -87,7 +87,7 @@ export default function Home() {
                   <div>
                     <div className="list-card-cat">{a.icon} {a.cat}</div>
                     <div className="list-card-title">{a.title}</div>
-                    <div className="list-card-meta">{a.source} · {a.time}</div>
+                    <div className="list-card-meta">{a.time}</div>
                   </div>
                 </div>
               ))}

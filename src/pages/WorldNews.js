@@ -31,7 +31,7 @@ export default function WorldNews() {
                     <div className="art-card-cat" style={{color:'#7B2FBE'}}>{a.icon} {a.cat}</div>
                     <div className="art-card-title">{a.title}</div>
                     <div className="art-card-excerpt">{a.excerpt}</div>
-                    <div className="art-card-meta"><span>{a.source}</span><span style={{color:'#ddd'}}>·</span><span>{a.time}</span></div>
+                    <div className="art-card-meta"><span>{a.time}</span></div>
                   </div>
                 </div>
               ))}

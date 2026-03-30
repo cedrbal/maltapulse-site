@@ -22,29 +22,30 @@ export async function fetchBreaking() {
   }
 }
 
+const CAT_META = {
+  "Breaking": { icon: "🚨", color: "#CE1126", img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80" },
+  "News":     { icon: "📰", color: "#1877F2", img: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=80" },
+  "Weather":  { icon: "🌤️", color: "#1877F2", img: "https://images.unsplash.com/photo-1592210454359-9043f067919b?w=600&q=80" },
+  "Traffic":  { icon: "🚗", color: "#FF6B35", img: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=600&q=80" },
+  "Sports":   { icon: "⚽", color: "#2d9e6b", img: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=600&q=80" },
+  "Lifestyle":{ icon: "❤️", color: "#FF6B35", img: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" },
+  "World News":{ icon: "🌍", color: "#7B2FBE", img: "https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?w=600&q=80" },
+  "Culture":  { icon: "🎭", color: "#E8B922", img: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&q=80" },
+  "Health":   { icon: "🏥", color: "#2d9e6b", img: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=80" },
+};
+
 export function mapPost(p) {
-  const catMap = {
-    "Breaking": { icon: "🚨", color: "#CE1126" },
-    "News": { icon: "📰", color: "#1877F2" },
-    "Weather": { icon: "🌤️", color: "#1877F2" },
-    "Traffic": { icon: "🚗", color: "#FF6B35" },
-    "Sports": { icon: "⚽", color: "#2d9e6b" },
-    "Lifestyle": { icon: "❤️", color: "#FF6B35" },
-    "World News": { icon: "🌍", color: "#7B2FBE" },
-    "Culture": { icon: "🎭", color: "#E8B922" },
-    "Health": { icon: "🏥", color: "#2d9e6b" },
-  };
-  const cat = catMap[p.category] || { icon: "📰", color: "#1877F2" };
+  const cat = CAT_META[p.category] || CAT_META["News"];
   return {
     id: p.id,
     cat: p.category || "News",
     icon: cat.icon,
     color: cat.color,
     title: p.rawTitle,
-    excerpt: p.generatedPost?.slice(0, 200) + "...",
+    excerpt: p.generatedPost ? p.generatedPost.slice(0, 200).replace(/[\s.…]+$/, '') + '...' : '',
     time: timeAgo(p.timestamp),
     source: p.source,
-    img: `https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80`,
+    img: cat.img,
     breaking: p.isBreaking,
   };
 }
@@ -53,9 +54,12 @@ function timeAgo(timestamp) {
   if (!timestamp) return "Just now";
   const diff = Math.floor((Date.now() - new Date(timestamp)) / 1000);
   if (diff < 60) return `${diff}s ago`;
-  if (diff < 3600) return `${Math.floor(diff / 60)} min ago`;
-  if (diff < 86400) return `${Math.floor(diff / 3600)} hr ago`;
-  return `${Math.floor(diff / 86400)} days ago`;
+  const mins = Math.floor(diff / 60);
+  if (diff < 3600) return `${mins} ${mins === 1 ? 'min' : 'mins'} ago`;
+  const hrs = Math.floor(diff / 3600);
+  if (diff < 86400) return `${hrs} ${hrs === 1 ? 'hr' : 'hrs'} ago`;
+  const days = Math.floor(diff / 86400);
+  return `${days} ${days === 1 ? 'day' : 'days'} ago`;
 }
 
 export const ARTICLES = [

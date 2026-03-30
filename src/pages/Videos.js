@@ -19,7 +19,7 @@ export default function Videos() {
               <img src={a.img} alt="" className="video-thumb" style={{height:165}}/>
               <div className="play-btn" style={{width:44,height:44,fontSize:16}}>▶</div>
               <div className="video-title" style={{fontSize:14,padding:'10px 12px 12px'}}>{a.title}</div>
-              <div style={{padding:'0 12px 12px',fontSize:11,color:'rgba(255,255,255,0.4)'}}>{a.source} · {a.time}</div>
+              <div style={{padding:'0 12px 12px',fontSize:11,color:'rgba(255,255,255,0.4)'}}>{a.time}</div>
             </div>
           ))}
         </div>

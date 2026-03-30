@@ -25,7 +25,7 @@ export default function Breaking() {
                   <div className="art-card-cat" style={{color:'#CE1126'}}>🔴 {a.cat}</div>
                   <div className="art-card-title" style={{fontSize:24}}>{a.title}</div>
                   <div className="art-card-excerpt">{a.excerpt}</div>
-                  <div className="art-card-meta"><span>{a.source}</span><span style={{color:'#ddd'}}>·</span><span>{a.time}</span></div>
+                  <div className="art-card-meta"><span>{a.time}</span></div>
                 </div>
               </div>
             ))}
@@ -36,7 +36,7 @@ export default function Breaking() {
                 <div>
                   <div className="list-card-cat">{a.icon} {a.cat}</div>
                   <div className="list-card-title">{a.title}</div>
-                  <div className="list-card-meta">{a.source} · {a.time}</div>
+                  <div className="list-card-meta">{a.time}</div>
                 </div>
               </div>
             ))}
