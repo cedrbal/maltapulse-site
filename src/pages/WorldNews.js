@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ARTICLES } from '../data';
 import Sidebar from '../components/Sidebar';
 
-const cardLink = { display:'block', textDecoration:'none', color:'inherit' };
+const cardLink = { textDecoration:'none', color:'inherit' };
 
 const WORLD = [
   { id:10, cat:"World News", icon:"🌍", color:"#7B2FBE", title:"Major earthquake strikes Turkey — 6.8 magnitude, rescue teams deployed", excerpt:"A powerful 6.8 magnitude earthquake has struck central Turkey causing widespread damage. International rescue teams are being deployed as casualty numbers rise.", time:"30 min ago", source:"Reuters · BBC · AP", img:"https://images.unsplash.com/photo-1590845947376-2638caa89309?w=600&q=80", breaking:true },

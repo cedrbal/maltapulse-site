@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 
-const cardLink = { display:'block', textDecoration:'none', color:'inherit' };
+const cardLink = { textDecoration:'none', color:'inherit' };
 
 const LIFE = [
   { id:1, cat:"Food & Drink", title:"10 best new restaurants to try in Malta this spring", excerpt:"From a hidden gem in Marsaxlokk to a rooftop spot in Valletta, Malta's dining scene is absolutely on fire right now.", time:"3 hrs ago", source:"Lovin Malta", img:"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" },

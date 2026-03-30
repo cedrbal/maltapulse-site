@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ARTICLES } from '../data';
 import Sidebar from '../components/Sidebar';
 
-const cardLink = { display:'block', textDecoration:'none', color:'inherit' };
+const cardLink = { textDecoration:'none', color:'inherit' };
 
 export default function Breaking() {
   const breaking = ARTICLES.filter(a => a.breaking);

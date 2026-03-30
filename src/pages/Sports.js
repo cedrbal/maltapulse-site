@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 
-const cardLink = { display:'block', textDecoration:'none', color:'inherit' };
+const cardLink = { textDecoration:'none', color:'inherit' };
 
 const SPORTS = [
   { id:1, cat:"Football", title:"Hibernians win BOV Premier League title with stunning 3-1 victory", excerpt:"Hibernians clinched the BOV Premier League title with a commanding win over Valletta FC at the National Stadium. Striker Miguel Dos Santos scored a hat-trick.", time:"1 hr ago", source:"Malta Sports", img:"https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=600&q=80" },

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { fetchPosts, mapPost, SHOWS } from '../data';
 import Sidebar from '../components/Sidebar';
 
-const cardLink = { display:'block', textDecoration:'none', color:'inherit' };
+const cardLink = { textDecoration:'none', color:'inherit' };
 
 export default function Home() {
   const [articles, setArticles] = useState([]);
@@ -11,7 +11,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchPosts().then(posts => {
-      setArticles(posts.map(mapPost));
+      setArticles(posts.map((p, i) => mapPost(p, i)));
       setLoading(false);
     });
   }, []);
