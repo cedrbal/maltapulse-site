@@ -131,7 +131,7 @@ export const NAV_LINKS = [
   { path:"/breaking", label:"Breaking News", icon:"🚨" },
   { path:"/local-news", label:"Local News", icon:"📰" },
   { path:"/world-news", label:"World News", icon:"🌍" },
-  { path:"/weather", label:"Weather", icon:"🌤️" },
+  { path:"/weather", label:"Beach Day", icon:"🏖️" },
   { path:"/traffic", label:"Traffic", icon:"🚗" },
   { path:"/sports", label:"Sports", icon:"⚽" },
   { path:"/lifestyle", label:"Lifestyle & Food", icon:"❤️" },
